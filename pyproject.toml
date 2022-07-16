@@ -18,7 +18,7 @@ keywords = []  #! Update me
 
 # Pypi classifiers: https://pypi.org/classifiers/
 classifiers = [  #! Update me
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 1 - Planning",
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
   "Topic :: Software Development :: Libraries :: Python Modules",
