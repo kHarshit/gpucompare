@@ -1,4 +1,3 @@
-# type: ignore[attr-defined]
 """Compare GPUs"""
 
 import sys
