@@ -41,6 +41,46 @@ or with `Poetry`:
 poetry run gpucompare --help
 ```
 
+## Working
+
+```bash
+$ gpucompare --help
+
+ Usage: gpucompare [OPTIONS]                                                                                
+                                                                                                            
+ Compare GPUs                                                                                               
+                                                                                                            
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --csv-data          TEXT  CSV file containing row-wise GPU data           [default: None] [required]  │
+│                                                                                                          │
+│                              Possible columns:                                                           │
+│                              gpu_name (str): name of gpu  [required]                                     │
+│                              architecture (str): GPU architecture                                        │
+│                              cuda_cores (int): number of cuda cores                                      │
+│                              fp32_perf (float): fp32 performance in TFLOPS                               │
+│                              fp16_perf (float): fp16 performance in TFLOPS                               │
+│                              int8_perf (float): int8 performance in TOPS                                 │
+│                              mem (float): gpu memory in GiB                                              │
+│                              mem_bandwidth (float): memory bandwidth in GB/s                             │
+│    --version   -v            Prints the version of the gpucompare package.                               │
+│    --help                    Show this message and exit.                                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+```bash
+$ gpucompare --csv-data assets/gpu_data.csv
+# gpu_data.csv
+# gpu_name,architecture,int8_perf,mem_bandwidth
+# A2,ampere,36,200
+# A10,ampere,250,600
+# A30,ampere,330,933
+{'A10/A2': '3.0x', 'A30/A2': '4.67x'}
+```
+
+## Contributing
+
+Thanks for considering contributing to this project. Please follow [Contributing guidelines](./CONTRIBUTING.md).
+
 ## 🛡 License
 
 [![License](https://img.shields.io/github/license/kHarshit/gpucompare)](https://github.com/kHarshit/gpucompare/blob/master/LICENSE)

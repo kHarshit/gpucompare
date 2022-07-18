@@ -1,0 +1,4 @@
+gpu_name,architecture,int8_perf,mem_bandwidth
+A2,ampere,36,200
+A10,ampere,250,600
+A30,ampere,330,933

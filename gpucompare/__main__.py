@@ -7,7 +7,7 @@ import typer
 from rich.console import Console
 
 from gpucompare import version
-from gpucompare.example import gpu_name
+from gpucompare.parse import parse_csv
 
 
 class Color(str, Enum):
@@ -36,15 +36,30 @@ def version_callback(print_version: bool) -> None:
 
 @app.command(name="")
 def main(
-    name: str = typer.Option(..., help="GPU name to print."),
-    color: Optional[Color] = typer.Option(
-        None,
-        "-c",
-        "--color",
-        "--colour",
-        case_sensitive=False,
-        help="Color for print. If not specified then choice will be random.",
+    csv_data: str = typer.Option(
+        ...,
+        help="""CSV file containing row-wise GPU data
+
+            \b 
+            Possible columns:
+            gpu_name (str): name of gpu  [required]
+            architecture (str): GPU architecture
+            cuda_cores (int): number of cuda cores
+            fp32_perf (float): fp32 performance in TFLOPS
+            fp16_perf (float): fp16 performance in TFLOPS
+            int8_perf (float): int8 performance in TOPS
+            mem (float): gpu memory in GiB
+            mem_bandwidth (float): memory bandwidth in GB/s
+            """,
     ),
+    # color: Optional[Color] = typer.Option(
+    #     None,
+    #     "-c",
+    #     "--color",
+    #     "--colour",
+    #     case_sensitive=False,
+    #     help="Color for print. If not specified then choice will be random.",
+    # ),
     print_version: bool = typer.Option(
         None,
         "-v",
@@ -55,11 +70,11 @@ def main(
     ),
 ) -> None:
     """Compare GPUs"""
-    if color is None:
-        color = choice(list(Color))
+    # if color is None:
+    color = choice(list(Color))
 
-    greeting: str = gpu_name(name)
-    console.print(f"[bold {color}]{greeting}[/]")
+    output: str = parse_csv(csv_data)
+    console.print(f"[bold {color}]{output}[/]")
 
 
 if __name__ == "__main__":
