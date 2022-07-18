@@ -79,7 +79,7 @@ $ gpucompare --csv-data assets/gpu_data.csv
 
 ## Contributing
 
-Thanks for considering contributing to this project. Please follow [Contributing guidelines](./CONTRIBUTING.md).
+Thanks for considering contributing to this project. Please follow [Contributing guidelines](https://github.com/kHarshit/gpucompare/blob/master/CONTRIBUTING.md).
 
 ## 🛡 License
 
