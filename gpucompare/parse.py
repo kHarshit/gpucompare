@@ -5,20 +5,21 @@ import csv
 from .compare import compare_gpus
 
 
-def parse_csv(csv_path: str) -> str:
+def parse_csv(csv_path: str) -> tuple[list[dict[str, str]], dict[str, str]]:
     """Print GPU name.
 
     Args:
         csv_path (str): path to CSV file containing row-wise GPU data
 
     Returns:
-        str: dictionary as string containing performance comparison of GPUs
+        out_detailed_dict: detailed dictionary as string containing performance comparison of GPUs
+        out_concise_dict: concise dictionary as string containing performance comparison of GPUs
 
     Examples:
         .. code:: python
 
             >>> parse_csv("/path/to/gpu_data.csv")
-                        "{'A10/A2': '3.0x', 'A30/A2': '4.67x'}"
+            ([{'gpu_name': 'A2', 'architecture': 'ampere', 'int8_perf': '36', 'mem_bandwidth': '200', 'performance': '1x'}, {'gpu_name': 'A10', 'architecture': 'ampere', 'int8_perf': '250', 'mem_bandwidth': '600', 'performance': '3.0x'}, {'gpu_name': 'A30', 'architecture': 'ampere', 'int8_perf': '330', 'mem_bandwidth': '933', 'performance': '4.67x'}], {'A10/A2': '3.0x', 'A30/A2': '4.67x'})
     """
     # list containing dicts having gpus specs
     gpu_spec_list = []

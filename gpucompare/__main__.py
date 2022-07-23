@@ -34,6 +34,23 @@ def version_callback(print_version: bool) -> None:
         raise typer.Exit()
 
 
+def print_table(my_dict, col_list=None):
+    """Pretty print a list of dictionaries (my_dict) as a dynamically sized table.
+    If column names (col_list) aren't specified, they will show in random order.
+    """
+    if not col_list:
+        col_list = list(my_dict[0].keys() if my_dict else [])
+    my_list = [col_list]  # 1st row = header
+    for item in my_dict:
+        my_list.append(
+            [str(item[col] if item[col] is not None else "") for col in col_list]
+        )
+    col_size = [max(map(len, col)) for col in zip(*my_list)]
+    format_str = " | ".join([f"{{:<{i}}}" for i in col_size])
+    my_list.insert(1, ["-" * i for i in col_size])  # Seperating line
+    return my_list, format_str
+
+
 @app.command(name="")
 def main(
     csv_data: str = typer.Option(
@@ -51,6 +68,12 @@ def main(
             mem (float): gpu memory in GiB
             mem_bandwidth (float): memory bandwidth in GB/s
             """,
+    ),
+    output: str = typer.Option(
+        "concise",
+        "--output",
+        case_sensitive=False,
+        help="Output in 'concise' or 'detailed' format.",
     ),
     # color: Optional[Color] = typer.Option(
     #     None,
@@ -73,8 +96,13 @@ def main(
     # if color is None:
     color = choice(list(Color))
 
-    output: str = parse_csv(csv_data)
-    console.print(f"[bold {color}]{output}[/]")
+    detailed_dict, concise_dict = parse_csv(csv_data)
+    if output == "concise":
+        console.print(f"[bold {color}]{concise_dict}[/]")
+    elif output == "detailed":
+        out_list, format_str = print_table(detailed_dict)
+        for item in out_list:
+            console.print(f"[bold {color}]{format_str.format(*item)}[/]")
 
 
 if __name__ == "__main__":

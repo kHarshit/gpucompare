@@ -28,7 +28,32 @@ from gpucompare.compare import compare_gpus
                     "mem_bandwidth": "933",
                 },
             ],
-            "{'A10/A2': '3.0x', 'A30/A2': '4.67x'}",
+            (
+                [
+                    {
+                        "gpu_name": "A2",
+                        "architecture": "ampere",
+                        "int8_perf": "36",
+                        "mem_bandwidth": "200",
+                        "performance": "1x",
+                    },
+                    {
+                        "gpu_name": "A10",
+                        "architecture": "ampere",
+                        "int8_perf": "250",
+                        "mem_bandwidth": "600",
+                        "performance": "3.0x",
+                    },
+                    {
+                        "gpu_name": "A30",
+                        "architecture": "ampere",
+                        "int8_perf": "330",
+                        "mem_bandwidth": "933",
+                        "performance": "4.67x",
+                    },
+                ],
+                {"A10/A2": "3.0x", "A30/A2": "4.67x"},
+            ),
         ),
     ],
 )

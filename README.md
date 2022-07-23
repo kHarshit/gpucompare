@@ -61,6 +61,7 @@ $ gpucompare --help
 │                              fp16_perf (float): fp16 performance in TFLOPS                               │
 │                              int8_perf (float): int8 performance in TOPS                                 │
 │                              mem (float): gpu memory in GiB                                              │
+│    --output            TEXT  Output in 'concise' or 'detailed' format. [default: concise]                |
 │                              mem_bandwidth (float): memory bandwidth in GB/s                             │
 │    --version   -v            Prints the version of the gpucompare package.                               │
 │    --help                    Show this message and exit.                                                 │
@@ -75,6 +76,13 @@ $ gpucompare --csv-data assets/gpu_data.csv
 # A10,ampere,250,600
 # A30,ampere,330,933
 {'A10/A2': '3.0x', 'A30/A2': '4.67x'}
+
+$ gpucompare --csv-data assets/gpu_data.csv --output=detailed
+gpu_name | architecture | int8_perf | mem_bandwidth | performance
+-------- | ------------ | --------- | ------------- | -----------
+A2       | ampere       | 36        | 200           | 1x         
+A10      | ampere       | 250       | 600           | 3.0x       
+A30      | ampere       | 330       | 933           | 4.67x      
 ```
 
 ## Contributing
