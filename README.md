@@ -69,7 +69,8 @@ $ gpucompare --csv-data assets/gpu_data.csv
 # A2,ampere,36,200
 # A10,ampere,250,600
 # A30,ampere,330,933
-{'A10/A2': '3.0x', 'A30/A2': '4.67x'}
+# V100,volta,112,900
+{'A10/A2': '3.0x', 'A30/A2': '4.67x', 'V100/A2': '3.01x'}
 
 $ gpucompare --csv-data assets/gpu_data.csv --output=detailed
 gpu_name | architecture | int8_perf | mem_bandwidth | performance
